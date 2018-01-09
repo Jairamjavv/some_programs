@@ -1,0 +1,38 @@
+#include <stdio.h>
+
+int main(void) {
+	// your code goes here
+	int i=1,j,n,t,te;
+	scanf("%d",&n);
+	t=n;
+	if(n==1){
+		printf("*");
+	}
+	else{
+	int k = n*2-1;
+	while(i<k){
+		for(te=t-1;te>0;te--){
+			printf(" ");
+		}
+		for(j=0;j<i;j++){
+			printf("*");
+		}
+		printf("\n");
+		i+=2;
+		t--;
+	
+	}
+	while(i>0){
+		for(te=0;te<t-1;te++){
+			printf(" ");
+		}
+		for(j=i;j>0;j--){
+			printf("*");
+		}
+		
+		printf("\n");
+		i-=2;
+		t++;
+	}}
+	return 0;
+}
