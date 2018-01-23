@@ -1,0 +1,68 @@
+#include "stdio.h"
+#include "stdlib.h"
+struct node{
+  int val;
+  struct node *next;
+};
+void display(struct node *head){
+  while(head!=NULL){
+    printf("%d->",head->val);
+    head=head->next;
+  }
+  printf("NULL");
+}
+
+void insert(struct node **head,int n){
+  struct node *ne = (struct node*)malloc(sizeof(struct node));
+  struct node *last = *head;
+  ne->val = n;
+  ne->next=NULL;
+  if(*head==NULL){
+    *head = ne;
+    return;
+  }
+ while(last->next!=NULL){
+   last=last->next;
+ }
+ last->next=ne;
+ return;
+}
+
+
+void delNode(struct node **head,int n){
+  struct node *temp = *head,*prev;
+  if(temp!=NULL && temp->val==n){
+    (*head) = temp->next;
+    free(temp);
+    return;
+  }
+  while(temp!=NULL && temp->val!=n){
+    prev=temp;
+    temp=temp->next;
+  }
+  if(temp==NULL){
+    return;
+  }
+  prev->next=temp->next;
+  free(temp);
+ 
+}
+
+int main(void) {
+  int no,value,i;
+  printf("Enter the value to be inserted");
+  struct node *head=NULL;
+  for(i=0;i<2;i++){
+    scanf("%d",&value);
+    insert(&head,value);
+  }
+  display(head);
+  printf("\nEnter a value to be deleted:");
+  int delVal;
+  scanf("%d",&delVal);
+  delNode(&head,delVal);
+  printf("\n");
+  display(head);
+
+  return 0;
+}
