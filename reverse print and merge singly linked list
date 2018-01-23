@@ -1,0 +1,101 @@
+#include "stdio.h"
+#include "stdlib.h"
+struct node{
+  int val;
+  struct node *next;
+  struct node *prev;
+};
+void display(struct node *head){
+  while(head!=NULL){
+    printf("%d->",head->val);
+    head=head->next;
+  }
+  printf("NULL\n");
+}
+
+void revprint(struct node *head){
+  if(head==NULL)
+  return;
+  
+    revprint(head->next);
+  printf("%d->",head->val);
+}
+
+void insert(struct node **head,int n){
+  struct node *ne = (struct node*)malloc(sizeof(struct node));
+  struct node *last = *head;
+  ne->val = n;
+  ne->next=NULL;
+  if(*head==NULL){
+    *head = ne;
+    return;
+  }
+ while(last->next!=NULL){
+   last=last->next;
+ }
+ last->next=ne;
+ return;
+}
+
+struct node* merge(struct node *head, struct node *head1){
+  struct node* temp = NULL;
+  if(head==NULL){
+    return(head1);
+  }
+  else if(head1==NULL){
+    return(head);
+  }
+  
+  if(head->val <= head1->val){
+    temp = head;
+    temp->next = merge(head->next,head1);
+  }
+  else{
+    temp = head1;
+    temp->next = merge(head,head1->next);
+  }
+  return(temp);
+}
+
+void delNode(struct node **head,int n){
+  struct node *temp = *head,*prev;
+  if(temp!=NULL && temp->val==n){
+    (*head) = temp->next;
+    free(temp);
+    return;
+  }
+  while(temp!=NULL && temp->val!=n){
+    prev=temp;
+    temp=temp->next;
+  }
+  if(temp==NULL){
+    return;
+  }
+  prev->next=temp->next;
+  free(temp);
+ 
+}
+
+int main(void) {
+  int no,value,i;
+  printf("Enter the value to be inserted");
+  struct node *head=NULL;
+   struct node *head1=NULL;
+   struct node *res;
+  for(i=0;i<3;i++){
+    scanf("%d",&value);
+    insert(&head,value);
+  }
+  printf("insert for new one\n");
+  for(i=0;i<3;i++){
+    scanf("%d",&value);
+    insert(&head1,value);
+  }
+ res = merge(head,head1);
+  while(res!=NULL){
+    printf("%d-->",res->val);
+    res=res->next;
+  }
+
+  return 0;
+}
