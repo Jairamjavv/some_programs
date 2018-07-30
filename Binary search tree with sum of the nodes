@@ -1,0 +1,78 @@
+public class Main{
+    public static void main(String args[]){
+        BinaryTree bt = new BinaryTree();
+        bt.head = bt.push(10,bt.head);
+        bt.head = bt.push(15,bt.head);
+        bt.head = bt.push(13,bt.head);
+        bt.head = bt.push(5,bt.head);
+        bt.head = bt.push(12,bt.head);
+        bt.head = bt.push(2,bt.head);
+        bt.head = bt.push(16,bt.head);
+        
+        
+        bt.printInOrder(bt.head);
+        System.out.println();
+        int sum = bt.toSumTree(bt.head);
+        bt.printInOrder(bt.head);
+        
+        // System.out.println("Sum of tree "+sum);
+    }
+}
+
+class Node{
+    int data;
+    Node left;
+    Node right;
+    
+    Node(int item){
+        data = item;
+        
+        left = right = null;
+    }
+}
+
+class BinaryTree{
+    Node head;
+    
+    BinaryTree(){
+        head = null;
+    }
+    BinaryTree(int val){
+        head = new Node(val);
+    }
+    
+    int toSumTree(Node node){
+        if(node == null){
+            return 0;
+        }
+        
+        int oldValue = node.data;
+        node.data = toSumTree(node.left) + toSumTree(node.right);
+        
+        return node.data + oldValue;    
+    }
+    
+    void printInOrder(Node node){
+        if(node == null){
+            return;
+        }
+        printInOrder(node.left);
+        System.out.println(node.data+" ");
+        printInOrder(node.right);
+    }
+    
+    Node push(int value, Node root){
+        Node node = new Node(value);
+        if(root == null){
+            root = node;
+            return root;
+        }
+        if(value < root.data){
+            root.left = push(value,root.left);
+        }else if(value>root.data){
+            root.right = push(value,root.right);
+        }
+        
+        return root;
+    }
+}
