@@ -1,0 +1,35 @@
+import java.io.*;
+import java.util.*;
+import java.lang.*;
+
+public class Main
+{
+    static int lcs(char x[],char y[],int a,int b){
+        if(a == 0 || b == 0){
+            return 0;
+        }
+        if(x[a-1] == y[b-1]){
+            return 1+lcs(x,y,a-1,b-1);
+        }
+        else{
+            return max(lcs(x,y,a,b-1),lcs(x,y,a-1,b));
+        }
+    }
+    
+    static int max(int A, int B){
+        return (A>B)?A:B;
+    }
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		String str1 = "Jayram";
+		String str2 = "Sairam";
+		
+		char[] x = str1.toCharArray();
+		char[] y = str2.toCharArray();
+		
+		int l1 = str1.length();
+		int l2 = str2.length();
+		
+		System.out.println(lcs(x,y,l1,l2));
+	}
+}
