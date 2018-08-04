@@ -1,0 +1,23 @@
+import java.io.*;
+import java.util.*;
+import java.lang.*;
+class Main {
+
+  static int steps(int ar[], int value){
+    for(int i=2;i<=value;i++){
+      ar[i] = ar[i-1] + ar[i-2];
+    }
+    return ar[value];
+  }
+
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    int input = scan.nextInt();
+    int ar[] = new int[input+1];
+    ar[0] = 1;
+    ar[1] = 1;
+
+    int result  = steps(ar,input);
+    System.out.println(result);
+  }
+}
