@@ -1,0 +1,34 @@
+// to count the number of steps in one hop or two hop to reash the top of the stair case
+
+
+import java.io.*;
+import java.util.*;
+import java.lang.*;
+class Main {
+
+  static int steps(int ar[], int value){
+    if(value<2){
+      return 1;
+    }
+    else{
+      if(ar[value] == 0){
+        ar[value] = steps(ar,value-1) + steps(ar,value-2);
+      }
+    }
+    return ar[value];
+  }
+
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    int input = scan.nextInt();
+    int ar[] = new int[input+1];
+    for(int i=0;i<input+1;i++){
+      ar[i] = 0;
+    }
+    ar[0] = 1;
+    ar[1] = 1;
+
+    int result  = steps(ar,input);
+    System.out.println(result);
+  }
+}
