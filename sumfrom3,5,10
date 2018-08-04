@@ -1,22 +1,31 @@
 import java.io.*;
 import java.util.*;
 import java.lang.*;
+class Main {
 
-public class Main
-{
-    static int Sum(int c,int s,int n){
-        if(s == n){
-            return 1;
-        }else if(s<n){
-            c += Sum(c,s+3,n)+Sum(c,s+5,n)+Sum(c,s+10,n);
-        }
-        return c;
+  static int steps(int ar[], int value){
+   for(int i=3;i<=value;i++){
+     ar[i]+=ar[i-3];
+   }
+   for(int i=5;i<=value;i++){
+     ar[i]+=ar[i-5];
+   }
+   for(int i=10;i<=value;i++){
+     ar[i]+=ar[i-10];
+   }
+
+   return ar[value];
+  }
+
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    int n = scan.nextInt();
+    int arr[] = new int[n+1];
+    for(int i=0;i<=n;i++){
+      arr[i] = 0;
     }
-	public static void main(String[] args) {
-		Scanner scan = new Scanner(System.in);
-		int n = 20;
-		int c=0,sum=0;
-		
-		System.out.println(Sum(c,sum,n));
-	}
+arr[0] = 1;
+    int result = steps(arr,n);
+    System.out.println(result);
+  }
 }
