@@ -1,0 +1,48 @@
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+
+public class Main
+{
+	public static void main(String[] args) {
+		Graph g = new Graph(10);
+		
+		g.addEdge(g,1,2);
+		g.addEdge(g,1,3);
+		g.addEdge(g,2,3);
+		g.addEdge(g,2,4);
+		g.addEdge(g,3,4);
+		
+		g.printGraph(g);
+	}
+}
+
+
+class Graph{
+    int v;
+    LinkedList<Integer> list[];
+    
+    Graph(int v){
+        this.v = v;
+        list = new LinkedList[v];
+        
+        for(int i=0;i<v;i++){
+            list[i] = new LinkedList<>();
+        }
+        
+    }
+    
+    void addEdge(Graph G,int start, int end){
+        G.list[start].add(end);
+        G.list[end].add(start);
+    }
+    
+    void printGraph(Graph G){
+        for(int i=0;i<G.v;i++){
+            for(Integer I : G.list[i]){
+                System.out.print("->"+I);
+            }
+            System.out.println();
+        }
+    }
+}
