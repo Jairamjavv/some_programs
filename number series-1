@@ -1,0 +1,58 @@
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+public class Main
+{
+    static int[] prime(int num){
+        int pAr[] = new int[num+1];
+        int count = 0;
+        int in = 0;
+        if(num<2){
+            return null;
+        }
+        for(int j=2;j<=num;j++){
+            for(int i=1;i<=Math.sqrt(j);i++){
+                if(j%i == 0){
+                    count++;
+                }
+            }
+            if(count<2){
+               pAr[in] = j;
+               in++;
+            }
+            count = 0;
+        }
+        
+        return pAr;
+    }
+    
+    static int[] printFibonacci(int n){
+        int ar[] = new int[n];
+        ar[0] = 1;
+        ar[1] = 1;
+        for(int i=2;i<n;i++){
+            ar[i] = ar[i-1]+ar[i-2];
+        }
+        return ar;
+    }
+    
+	public static void main(String[] args) {
+		//1,2,1,3,2,5,3,7,5,11,8,13,13,17,
+		int num = 20;
+		int a[] = printFibonacci(num);
+		int b[] = prime(num);
+		
+		int odd = 0,even = 0;
+		for(int i=0;i<num;i++){
+		    if(i%2 != 0){
+		        System.out.print(b[odd]+" ");
+		        odd++;
+		    }
+		    else{
+		        System.out.print(a[even]+" ");
+		        even++;
+		    }
+		}
+		
+	}
+}
