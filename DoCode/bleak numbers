@@ -1,0 +1,40 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.BufferedInputStream;
+
+class Main {
+  static int bitCount(int n){
+    int c = 0;
+    while(n>0){
+      if(n%2 != 0){
+        c+=1;
+      }
+      n/=2;
+    }
+    return c;
+  }
+  public static void main(String[] args)throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int testcases = Integer.parseInt(br.readLine());
+        
+        int flag = 0;
+      for(int j=0;j<testcases;j++){
+        int n = Integer.parseInt(br.readLine());
+        for(int i=n;i>0;i--){
+          if(i+bitCount(i) == n){
+              flag = 1;break;
+          }else{
+              flag = 0;
+          }
+        }
+        if(flag == 1){
+          System.out.println("0");
+        }else{
+          System.out.println("1");
+        }
+      }
+
+        
+      }
+}
