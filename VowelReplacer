@@ -1,0 +1,13 @@
+import java.util.regex.*;
+public class Challenge {
+	public static String replaceVowels(String str, char ch) {
+		String pattern = "[aeiou]";
+		
+		Pattern r = Pattern.compile(pattern);
+		Matcher m = r.matcher(str);
+		
+		String s = m.replaceAll(Character.toString(ch));
+		
+		return s;
+	}
+}
