@@ -1,0 +1,68 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the repeatedString function below.
+    static long repeatedString(String s, long n) {
+        //Needed inputs
+        long sLen = s.length();
+        long c=0;
+
+        //if the given string length is smaller than the given n
+        if(sLen < n){
+            long muls = n/sLen;
+            long mods = n%sLen;
+            long mc=0;  
+
+            for(long i=0;i<sLen;i++){
+                if(s.charAt((int)i) == 'a'){
+                    c++;
+                }
+            }
+
+            for(long i=0;i<mods;i++){
+                if(s.charAt((int)i) == 'a'){
+                    mc++;
+                }
+            }
+
+            return (c*muls)+mc;
+        } else {
+            //else the given string length is larger than the given n
+            String newS = s.substring(0,(int)n);
+            for(long i=0;i<newS.length();i++){
+                if(s.charAt((int)i) == 'a'){
+                    c++;
+                }
+            }
+            return c;
+        }
+        
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String s = scanner.nextLine();
+
+        long n = scanner.nextLong();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        long result = repeatedString(s, n);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}
