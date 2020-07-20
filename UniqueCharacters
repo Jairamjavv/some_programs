@@ -1,0 +1,33 @@
+import java.util.*;
+
+public class MyClass {
+    public static boolean check(List<Character> l1, Character c){
+        for(Character checkC : l1){
+            if(checkC.equals(c))
+            return true;
+        }
+        return false;
+    }
+    
+    //get Each Character Count //under working
+    public static List<Character> getUniqueChars(StringBuilder s1){
+        List<Character> charList = new ArrayList<>();
+        
+        //traverse the string
+        for(int i=0;i<s1.length();i++){
+            if(!check(charList, s1.charAt(i))){
+                charList.add(s1.charAt(i));
+            }
+        }
+        return charList;
+    }
+    
+    public static void main(String args[]) {
+        StringBuilder sb = new StringBuilder("RamRamjiRam");
+    
+        List<Character> uniqueChars = getUniqueChars(sb);
+        for(Character c:uniqueChars){
+            System.out.print(c);
+        }
+    }
+}
