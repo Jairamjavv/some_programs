@@ -1,0 +1,55 @@
+public class MyClass {
+    public static boolean checkPer(int[] ar, String b, int s, int l, int len){
+        int newCh[] = new int[27];
+        
+        //O(len(a))
+        for(int i=s;i<l;i++){
+            newCh[(int)b.charAt(i)-97] = 1;
+        }
+        int temp=0;
+        
+        //O(26) ~ Constant and can be neglected
+        for(int i=0;i<26;i++){
+            if(newCh[i] == ar[i] && newCh[i] == 1){
+                temp++;
+            }
+        }
+        if(temp == (l-s)){
+            return true;
+            
+        }
+        return false;
+    }
+    
+    public static void main(String args[]) {
+        String a = "xy";
+        
+        String b = "akbcaxyzjdhfuaxbyzcqscazbyxc";
+        
+        int[] ch = new int[27];
+        
+        //O(26) ~ Constant and can be neglected
+        for(int i= 0;i<26;i++){
+            ch[i] = 0;
+        }
+        
+        //O(len(a))
+        for(int i=0;i<a.length();i++){
+            ch[(int)a.charAt(i)-97] = 1;
+        }
+        
+        int count = 0;
+        
+        //0-length of (b-a) : O(len(b-a))
+        for(int i=0;i<=b.length()-a.length();i++){ 
+            if(checkPer(ch, b, i, i+(a.length()), a.length())){
+                count++;
+            }
+        }
+        
+        System.out.println(count);
+        
+        //Total Complexity :  O(len(a)) + O(len(b-a))*O(len(a))
+        //                  = O(len(a))[O(len(b-a))]
+    }
+}
